@@ -1,0 +1,11 @@
+{
+  "name": "Price Monitoring Dashboard",
+  "description": "Real-time Bitcoin and S&P 500 price monitoring dashboard",
+  "repository": "https://github.com/alurvarun6-alt/Test",
+  "keywords": ["python", "flask", "bitcoin", "sp500", "dashboard", "monitoring"],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
