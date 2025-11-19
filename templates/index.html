@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Monitoring Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Price Monitoring Dashboard</h1>
+            <p class="subtitle">Real-time tracking of Bitcoin & S&P 500</p>
+            <div class="last-update">
+                Last updated: <span id="last-update-time">Loading...</span>
+                <button id="refresh-btn" onclick="fetchPrices()">🔄 Refresh</button>
+            </div>
+        </header>
+
+        <div class="dashboard-grid">
+            <!-- Bitcoin Card -->
+            <div class="price-card" id="btc-card">
+                <div class="card-header">
+                    <h2>₿ Bitcoin (BTC)</h2>
+                    <span class="asset-icon">🟠</span>
+                </div>
+                <div class="price-display">
+                    <div class="current-price">
+                        $<span id="btc-price">--</span>
+                    </div>
+                    <div class="price-change" id="btc-change">
+                        <span class="change-value">--</span>
+                    </div>
+                </div>
+                <div class="additional-info">
+                    <div class="info-item">
+                        <span class="label">Market Cap:</span>
+                        <span id="btc-mcap">--</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="btc-chart"></canvas>
+                </div>
+            </div>
+
+            <!-- S&P 500 Card -->
+            <div class="price-card" id="sp500-card">
+                <div class="card-header">
+                    <h2>📈 S&P 500 (SPX)</h2>
+                    <span class="asset-icon">🔵</span>
+                </div>
+                <div class="price-display">
+                    <div class="current-price">
+                        $<span id="sp500-price">--</span>
+                    </div>
+                    <div class="price-change" id="sp500-change">
+                        <span class="change-value">--</span>
+                    </div>
+                </div>
+                <div class="additional-info">
+                    <div class="info-item">
+                        <span class="label">Prev Close:</span>
+                        <span id="sp500-prev">--</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="sp500-chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-panel">
+            <h3>⚙️ Settings</h3>
+            <div class="setting-item">
+                <label for="refresh-interval">Auto-refresh interval:</label>
+                <select id="refresh-interval" onchange="updateRefreshInterval()">
+                    <option value="0">Off</option>
+                    <option value="5000">5 seconds</option>
+                    <option value="10000">10 seconds</option>
+                    <option value="30000" selected>30 seconds</option>
+                    <option value="60000">1 minute</option>
+                    <option value="300000">5 minutes</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <label for="chart-period">Chart period:</label>
+                <select id="chart-period" onchange="updateCharts()">
+                    <option value="1">24 hours</option>
+                    <option value="7" selected>7 days</option>
+                    <option value="30">30 days</option>
+                </select>
+            </div>
+        </div>
+
+        <footer>
+            <p>Data sources: CoinGecko (BTC) & Yahoo Finance (S&P 500)</p>
+            <p class="status">Status: <span id="connection-status" class="status-indicator">●</span></p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
